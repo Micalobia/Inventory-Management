@@ -16,6 +16,9 @@ void setup() {
   main.addStorable(otherSmall);
   main.addStorable(new Item("random item"));
   saveJSONObject(main.getJSONObject(),"test.json","indent=1");
+  
+  //New Comment
+  
 }
 void draw() {
 }
