@@ -5,6 +5,74 @@ class Storage implements Storable {
   private int _width;
   private int _height;
   private String[] _tags;
+  
+  private Storable[] _stored;
+  
+  public Storage(String name) {
+    _name = name;
+    _tags = new String[0];
+    _stored = new Storable[0];
+  }
+  
+  JSONObject getJSONObject() {
+    JSONObject json = new JSONObject();
+    json.setString("name", _name);
+    json.setString("type", "storage");
+    json.setInt("x", _x);
+    json.setInt("y", _y);
+    json.setInt("width", _width);
+    json.setInt("height", _height);
+    
+    JSONArray tags = new JSONArray();
+    for(int i = 0; i < _tags.length; i++) tags.setString(i, _tags[i]);
+    json.setJSONArray("tags",tags);
+    
+    JSONArray stored = new JSONArray();
+    for(int i = 0; i < _stored.length; i++) stored.setJSONObject(i,_stored[i].getJSONObject());
+    json.setJSONArray("stored",stored);
+    
+    return json;
+  }
+  
+  Storable[] getStored() {
+    return _stored;
+  }
+  
+  void addStorable(Storable storable) {
+    //Create a new list of storables that is one larger than the current list of storables
+    Storable[] a = new Storable[_stored.length+1];
+    //Populate the new list of storables with the old stuff
+    for (int i = 0; i < _stored.length; i++) {
+      a[i] = _stored[i];
+    }
+    //Set the last item to the new storable
+    a[_stored.length] = storable;
+    //Set our storables to the new storables list
+    _stored = a;
+  }
+  
+  void addStorables(Storable[] storables) {
+    //Create a new list of storables that is larger than the current list of storables
+    Storable[] a = new Storable[_stored.length+storables.length];
+    //Populate the new list of storables with the old stuff
+    for (int i = 0; i < _stored.length; i++) {
+      a[i] = _stored[i];
+    }
+    //Populate the rest of the new list with the new storables
+    for (int i = 0; i < storables.length; i++) {
+      a[i + _stored.length] = storables[i];
+    }
+    //Set our storables to the new storables list
+    _stored = a;
+  }
+  
+  Storable getStorable(int index) {
+    return _stored[index];
+  }
+  
+  void setStorable(int index, Storable storable) {
+    _stored[index] = storable;
+  }
 
   String getName() {
     return _name;

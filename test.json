@@ -1,0 +1,89 @@
+{
+ "stored": [
+  {
+   "stored": [
+    {
+     "quantity": 0,
+     "name": "apple",
+     "x": 0,
+     "width": 0,
+     "y": 0,
+     "type": "item",
+     "height": 0,
+     "tags": []
+    },
+    {
+     "quantity": 0,
+     "name": "orange",
+     "x": 0,
+     "width": 0,
+     "y": 0,
+     "type": "item",
+     "height": 0,
+     "tags": []
+    }
+   ],
+   "name": "small",
+   "x": 0,
+   "width": 0,
+   "y": 0,
+   "type": "storage",
+   "height": 0,
+   "tags": [
+    "fruit",
+    "hasPerishable"
+   ]
+  },
+  {
+   "stored": [
+    {
+     "stored": [],
+     "name": "pill box",
+     "x": 0,
+     "width": 0,
+     "y": 0,
+     "type": "storage",
+     "height": 0,
+     "tags": ["movable"]
+    },
+    {
+     "quantity": 0,
+     "name": "cucumber",
+     "x": 0,
+     "width": 0,
+     "y": 0,
+     "type": "item",
+     "height": 0,
+     "tags": []
+    }
+   ],
+   "name": "othersmall",
+   "x": 0,
+   "width": 0,
+   "y": 0,
+   "type": "storage",
+   "height": 0,
+   "tags": [
+    "random",
+    "hasPerishable"
+   ]
+  },
+  {
+   "quantity": 0,
+   "name": "random item",
+   "x": 0,
+   "width": 0,
+   "y": 0,
+   "type": "item",
+   "height": 0,
+   "tags": []
+  }
+ ],
+ "name": "main",
+ "x": 0,
+ "width": 0,
+ "y": 0,
+ "type": "storage",
+ "height": 0,
+ "tags": []
+}

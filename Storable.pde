@@ -14,4 +14,5 @@ interface Storable {
   int getHeight();             //Gets the height of the object
   void setWidth(int width);    //Sets the width of the object
   void setHeight(int height);  //Sets the height of the object
+  JSONObject getJSONObject();
 }

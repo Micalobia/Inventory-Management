@@ -5,6 +5,39 @@ class Item implements Storable {
   private int _width;
   private int _height;
   private String[] _tags;
+  
+  private int _quantity;
+  
+  public Item(String name) {
+    _name = name;
+    _tags = new String[0];
+  }
+
+  JSONObject getJSONObject() {
+    JSONObject json = new JSONObject();
+    json.setString("name", _name);
+    json.setString("type", "item");
+    json.setInt("x", _x);
+    json.setInt("y", _y);
+    json.setInt("width", _width);
+    json.setInt("height", _height);
+    
+    JSONArray tags = new JSONArray();
+    for(int i = 0; i < _tags.length; i++) tags.setString(i, _tags[i]);
+    json.setJSONArray("tags",tags);
+    
+    json.setInt("quantity",_quantity);
+    
+    return json;
+  }
+  
+  int getQuantity() {
+    return _quantity;
+  }
+  
+  void setQuantity(int quantity) {
+    _quantity = quantity;
+  }
 
   String getName() {
     return _name;
