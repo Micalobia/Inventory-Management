@@ -1,5 +1,6 @@
 class Item implements Storable {
   private String _name;
+  private String _type;
   private int _x;
   private int _y;
   private int _width;
@@ -11,6 +12,7 @@ class Item implements Storable {
   public Item(String name) {
     _name = name;
     _tags = new String[0];
+    _type = "item";
   }
 
   JSONObject getJSONObject() {
@@ -29,6 +31,10 @@ class Item implements Storable {
     json.setInt("quantity",_quantity);
     
     return json;
+  }
+  
+  String getType() {
+    return _type;
   }
   
   int getQuantity() {

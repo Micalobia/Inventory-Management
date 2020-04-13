@@ -1,5 +1,8 @@
+//Defines what a storage should be, things like boxes or rooms
 class Storage implements Storable {
   private String _name;
+  private String _type;
+  private boolean _room;
   private int _x;
   private int _y;
   private int _width;
@@ -8,12 +11,15 @@ class Storage implements Storable {
   
   private Storable[] _stored;
   
-  public Storage(String name) {
+  public Storage(String name, boolean room) {
     _name = name;
     _tags = new String[0];
     _stored = new Storable[0];
+    _type = "storage";
+    _room = room;
   }
   
+  //Creates the file object
   JSONObject getJSONObject() {
     JSONObject json = new JSONObject();
     json.setString("name", _name);
@@ -22,6 +28,7 @@ class Storage implements Storable {
     json.setInt("y", _y);
     json.setInt("width", _width);
     json.setInt("height", _height);
+    json.setBoolean("room",_room);
     
     JSONArray tags = new JSONArray();
     for(int i = 0; i < _tags.length; i++) tags.setString(i, _tags[i]);
@@ -36,6 +43,10 @@ class Storage implements Storable {
   
   Storable[] getStored() {
     return _stored;
+  }
+  
+  String getType() {
+    return _type;
   }
   
   void addStorable(Storable storable) {

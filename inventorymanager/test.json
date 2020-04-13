@@ -28,6 +28,7 @@
    "width": 0,
    "y": 0,
    "type": "storage",
+   "room": false,
    "height": 0,
    "tags": [
     "fruit",
@@ -43,6 +44,7 @@
      "width": 0,
      "y": 0,
      "type": "storage",
+     "room": false,
      "height": 0,
      "tags": ["movable"]
     },
@@ -62,6 +64,7 @@
    "width": 0,
    "y": 0,
    "type": "storage",
+   "room": false,
    "height": 0,
    "tags": [
     "random",
@@ -84,6 +87,7 @@
  "width": 0,
  "y": 0,
  "type": "storage",
+ "room": true,
  "height": 0,
  "tags": []
 }
