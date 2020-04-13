@@ -1,4 +1,4 @@
-class ButtonControl {
+class ButtonControl implements Control {
   int x;
   int y;
   int width;
@@ -19,18 +19,21 @@ class ButtonControl {
   private boolean _noStroke;
   private float _strokeWeight;
   private color _textColor;
-  
+
   private color _heldFillColor;
   private color _heldStrokeColor;
   private boolean _heldNoStroke;
   private float _heldStrokeWeight;
   private color _heldTextColor;
-  
+
   private color _lockedFillColor;
   private color _lockedStrokeColor;
   private boolean _lockedNoStroke;
   private float _lockedStrokeWeight;
   private color _lockedTextColor;
+
+  private float _textSize;
+ 
 
   ButtonControl(int x, int y, int width, int height) {
     this.x = x;
@@ -40,6 +43,7 @@ class ButtonControl {
     _circle = false;
     _img = null;
     _label = null;
+    _textSize = height / 2;
   }
 
   ButtonControl(int x, int y, int width, int height, String text) {
@@ -50,6 +54,7 @@ class ButtonControl {
     _circle = false;
     _img = null;
     _label = text;
+    _textSize = height / 2;
   }
 
   ButtonControl(int x, int y, int width, int height, PImage img) {
@@ -60,6 +65,7 @@ class ButtonControl {
     _circle = false;
     _img = img;
     _label = null;
+    _textSize = height / 2;
   }
 
   ButtonControl(int x, int y, int width, int height, String text, PImage img, boolean circle) {
@@ -70,6 +76,11 @@ class ButtonControl {
     _circle = circle;
     _img = img;
     _label = text;
+    _textSize = height / 2;
+  }
+
+  void setTextSize(float val) {
+    _textSize = val;
   }
 
   void setFill(color col) {
@@ -84,11 +95,11 @@ class ButtonControl {
   void setNoStroke() {
     _noStroke = true;
   }
-  
+
   void setStrokeWeight(float val) {
     _strokeWeight = val;
   }
-  
+
   void setTextColor(color col) {
     _textColor = col;
   }
@@ -105,15 +116,15 @@ class ButtonControl {
   void setHeldNoStroke() {
     _heldNoStroke = true;
   }
-  
+
   void setHeldStrokeWeight(float val) {
     _heldStrokeWeight = val;
   }
-  
+
   void setHeldTextColor(color col) {
     _heldTextColor = col;
   }
-  
+
   void setLockedFill(color col) {
     _lockedFillColor = col;
   }
@@ -126,25 +137,26 @@ class ButtonControl {
   void setLockedNoStroke() {
     _lockedNoStroke = true;
   }
-  
+
   void setLockedStrokeWeight(float val) {
     _lockedStrokeWeight = val;
   }
-  
+
   void setLockedTextColor(color col) {
     _lockedTextColor = col;
   }
-  
+
   void isEllipse() {
     _circle = true;
   }
-  
+
   void isRect() {
     _circle = false;
   }
 
   void loop() {
-    if(_circle) _hover = Helper.PointInEllipse(mouseX, mouseY, x + width / 2, y + height / 2, width, height);
+    if (_hidden) return; //TODO: Check if this is a good idea
+    if (_circle) _hover = Helper.PointInEllipse(mouseX, mouseY, x + width / 2, y + height / 2, width, height);
     else _hover = mouseX > x && mouseX < x + width && mouseY > y && mouseY < y + height;
     _heldOld = _held;
     _held = _onHold();
@@ -185,12 +197,8 @@ class ButtonControl {
   boolean onRelease() {
     return _heldOld && !_held && _hover;
   }
-  
-  void draw() {
-    draw(height / 2);
-  }
 
-  void draw(float textSize) {
+  void draw() {
     //If the button is hidden, don't even bother drawing
     if (_hidden) return;
     //Different colors based on if you're holding the button or not
@@ -199,7 +207,7 @@ class ButtonControl {
       if (_heldNoStroke) noStroke();
       else stroke(_heldStrokeColor);
       fill(_heldFillColor);
-    } else if(_locked) {
+    } else if (_locked) {
       strokeWeight(_lockedStrokeWeight);
       if (_lockedNoStroke) noStroke();
       else stroke(_lockedStrokeColor);
@@ -216,17 +224,17 @@ class ButtonControl {
     } else {
       rect(x, y, width, height);
     }
-    if(_img!=null) {
+    if (_img!=null) {
     }
-    if(_label!=null) {
+    if (_label!=null) {
       noStroke();
-      if(_held) fill(_heldTextColor);
-      else if(_locked) fill(_lockedTextColor);
+      if (_held) fill(_heldTextColor);
+      else if (_locked) fill(_lockedTextColor);
       else fill(_textColor);
-      textSize(textSize);
+      textSize(_textSize);
       float _x = x + (width - textWidth(_label)) / 2;
       float _y = y + (height + (textAscent() - textDescent()) * 0.8) / 2;
-      println(_x,',',_y);
+      println(_x, ',', _y);
       text(_label, _x, _y);
     }
   }
